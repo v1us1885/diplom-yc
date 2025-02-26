@@ -1,0 +1,23 @@
+- name: Генерация hosts.yml для Kubespray
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Получаем IP-адреса из Terraform
+      command: terraform output -json
+      register: tf_output
+      args:
+        chdir: "{{ playbook_dir }}"
+
+    - name: Парсим IP-адреса из Terraform outputs
+      set_fact:
+        master_external_ip: "{{ (tf_output.stdout | from_json).k8s_master_external_ip.value }}"
+        master_internal_ip: "{{ (tf_output.stdout | from_json).k8s_master_internal_ip.value }}"
+        node1_external_ip: "{{ (tf_output.stdout | from_json).k8s_node1_external_ip.value }}"
+        node1_internal_ip: "{{ (tf_output.stdout | from_json).k8s_node1_internal_ip.value }}"
+        node2_external_ip: "{{ (tf_output.stdout | from_json).k8s_node2_external_ip.value }}"
+        node2_internal_ip: "{{ (tf_output.stdout | from_json).k8s_node2_internal_ip.value }}"
+
+    - name: Создаём `hosts.yml`
+      template:
+        src: "{{ playbook_dir }}/hosts_template.j2"
+        dest: "{{ playbook_dir }}/hosts.yml"

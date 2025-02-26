@@ -1,0 +1,37 @@
+name: Terraform Apply
+
+on:
+  push:
+    branches:
+      - main  # Запуск при коммитах в main-ветку
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./terraform # Папка с Terraform файлами
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.0
+
+      - name: Configure Yandex Cloud Credentials
+        run: |
+          echo "[default]" > ~/.aws/credentials
+          echo "aws_access_key_id=${{ secrets.YC_ACCESS_KEY_ID }}" >> ~/.aws/credentials
+          echo "aws_secret_access_key=${{ secrets.YC_SECRET_ACCESS_KEY }}" >> ~/.aws/credentials
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Plan
+        run: terraform plan -out=tfplan
+
+      - name: Terraform Apply
+        run: terraform apply -auto-approve tfplan
