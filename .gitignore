@@ -10,3 +10,9 @@ backend.tf
 remote_state.tf
 k8s-nodes/backend.tf
 k8s-nodes/remote_state.tf
+sa-backet/terraform.tfvars
+mks-cluster/providers.tf
+backend.tf
+remote_state.tf
+k8s-nodes/backend.tf
+k8s-nodes/remote_state.tf
