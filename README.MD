@@ -66,7 +66,7 @@ exec -l $SHELL
 ```
 yc init
 ```
-[alt text](Screenshot_1.png)
+(Screenshot_1.png)
 
 ## ШАГ 2: Настройка Terraform
 * Для работы с Terraform нужно его установить:
