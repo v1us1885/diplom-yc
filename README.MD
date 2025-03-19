@@ -83,7 +83,7 @@ sudo chmod +x /usr/local/bin/terraform
  ```
  terraform --version
  ```
-[Screenshot_2.png]
+![](Screenshot_2.png)
 
 ## ШАГ 3: Установка провайдера Yandex Cloud
 * Создадим файл ~/.terraformrc и добавим блок 
@@ -102,7 +102,11 @@ provider_installation {
 ## ШАГ 4: Подготовка сервисного аккаунта и backend для Terraform
 * подготовим файлы terraform: 
 /diplom/sa-backet/
-[main.tf] [outputs.tf] [providers.tf] [variables.tf] [terraform.tfvars]
+[main.tf](https://github.com/v1us1885/diplom-yc/blob/main/diplom/sa-backet/main.tf)
+[outputs.tf] (https://github.com/v1us1885/diplom-yc/blob/main/diplom/sa-backet/outputs.tf)
+[providers.tf](https://github.com/v1us1885/diplom-yc/blob/main/diplom/sa-backet/mproviders.tf)
+[variables.tf](https://github.com/v1us1885/diplom-yc/blob/main/diplom/sa-backet/variables.tf)
+[terraform.tfvars](https://github.com/v1us1885/diplom-yc/blob/main/diplom/sa-backet/terraform.tfvars)
   * main.tf
     - Создание сервисного аккаунта
     - Назначение роли storage.editor сервисному аккаунту (для управления бакетом)
