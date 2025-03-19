@@ -428,7 +428,7 @@ git add .
 git commit -m "add infra-diplom"
 git push
 ```
-![](Screenshot_25.png)
+![](Screenshot_26.png)
 
 ## ШАГ 4: подготовка ci/cd terraform
 * Подготовим файл для terraform apply инфраструктуры при изменении кода
