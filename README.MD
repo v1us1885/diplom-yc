@@ -119,14 +119,14 @@ provider_installation {
 ```
 terraform init
 ```
-[Screenshot_3.png]
+![](Screenshot_3.png)
 
 ```
 terraform validate
 terraform plan
 terraform apply
 ```
-[Screenshot_4.png]
+![](Screenshot_4.png)
 
  - По окончанию работы Terraform у нас создан сервисный аккаунт, файл backend.tf для дальнейшего его использования при разворачивании vpc. Данные секрета добавлены в профиль, для более удобного использования.
 
@@ -136,9 +136,14 @@ yc iam key create --service-account-id ************** --output ~/diplom/sa-key-i
 ```
 
 ## ШАГ 5: Подготовка файлов для разворачивания vpc
-* подготовим файлы terraform: 
-/diplom/terraform/
-[main.tf] [outputs.tf] [providers.tf] [variables.tf] [terraform.tfvars] [backend.tf]
+* подготовим файлы terraform:  
+/diplom/terraform/   
+[main.tf](https://github.com/v1us1885/diplom-yc/blob/main/diplom/terraform/main.tf)   
+[outputs.tf](https://github.com/v1us1885/diplom-yc/blob/main/diplom/terraform/outputs.tf)   
+[providers.tf](https://github.com/v1us1885/diplom-yc/blob/main/diplom/terraform/providers.tf)   
+[variables.tf](https://github.com/v1us1885/diplom-yc/blob/main/diplom/terraform/variables.tf)   
+[terraform.tfvars](https://github.com/v1us1885/diplom-yc/blob/main/diplom/terraform/terraform.tfvars)   
+[backend.tf](https://github.com/v1us1885/diplom-yc/blob/main/diplom/terraform/backend.tf)   
   * main.tf
     - Создание VPC
     - Создание подсети в доступных зонах
@@ -149,7 +154,7 @@ yc iam key create --service-account-id ************** --output ~/diplom/sa-key-i
 ```
 terraform init
 ```
-[Screenshot_5.png]
+![](Screenshot_5.png)
   - Видим что Terraform теперь использует backend
 
 ```
@@ -157,14 +162,14 @@ terraform validate
 terraform plan
 terraform apply
 ```
-[Screenshot_6.png]
+![](Screenshot_6.png)
   - Появился файл terraform.tfstate в бакете
-[Screenshot_7.png]
+![](Screenshot_7.png)
 
 * Проверяем что можем выполнить команды `terraform destroy` и `terraform apply` без дополнительных ручных действий.
 
-[Screenshot_8.png]
-[Screenshot_9.png]
+![](Screenshot_8.png)
+![](Screenshot_9.png)
 
 
 ---
@@ -191,9 +196,16 @@ terraform apply
 ### Решение
 
 ## ШАГ 1: Подготовка файлов для разворачивания кластера k8s
-* Подготовим файлы Terraform для разворачивания кластера k8s, воспользуемся сервисом Yandex Managed Service for Kubernetes
-/diplom/terraform-mks
-[k8s-cluster.tf] [mks-node-group.tf] [outputs.tf] [providers.tf] [backend.tf] [remote_state.tf] [variables.tf] [terraform.tfvars]
+* Подготовим файлы Terraform для разворачивания кластера k8s, воспользуемся сервисом Yandex Managed Service for Kubernetes   
+/diplom/terraform-mks   
+[k8s-cluster.tf](https://github.com/v1us1885/diplom-yc/blob/main/diplom/terraform-mks/k8s-cluster.tf)   
+[mks-node-group.tf](https://github.com/v1us1885/diplom-yc/blob/main/diplom/terraform-mks/mks-node-group.tf)   
+[outputs.tf](https://github.com/v1us1885/diplom-yc/blob/main/diplom/terraform-mks/outputs.tf)   
+[providers.tf](https://github.com/v1us1885/diplom-yc/blob/main/diplom/terraform-mks/providers.tf)   
+[backend.tf](https://github.com/v1us1885/diplom-yc/blob/main/diplom/terraform-mks/backend.tf)   
+[remote_state.tf](https://github.com/v1us1885/diplom-yc/blob/main/diplom/terraform-mks/remote_state.tf)   
+[variables.tf](https://github.com/v1us1885/diplom-yc/blob/main/diplom/terraform-mks/variables.tf)   
+[terraform.tfvars](https://github.com/v1us1885/diplom-yc/blob/main/diplom/terraform-mks/terraform.tfvars)   
 
 * remot_state.tf
   - Подключение к удаленному состоянию Terraform, для получения данных id vpc и подсети
@@ -211,7 +223,7 @@ terraform apply
 
 * Добавили роли для сервисного аккаунта, чтоб он мог разворачивать k8s и работать с ним
 /diplom/sa-backet
-[main.tf]
+[main.tf](https://github.com/v1us1885/diplom-yc/blob/main/diplom/sa-backet/main.tf)   
 
 ## ШАГ 2: Установка утилиты для работы с k8s
 * для работы с k8s установим утилиту kubectl
@@ -225,7 +237,7 @@ sudo snap install kubectl --classic
 ```
 terraform init
 ```
-[Screenshot_10.png]
+![](Screenshot_10.png)
   - Видим что Terraform теперь использует backend
 
 ```
@@ -233,19 +245,19 @@ terraform validate
 terraform plan
 terraform apply
 ```
-[Screenshot_11.png]
+![](Screenshot_11.png)
 
 ## ШАГ 4: Настроим подключение к кластеру k8s
 * добавим контекст кластера в файл ~/.kube/config
 ```
 yc managed-kubernetes cluster get-credentials --name mks-cluster --folder-id b1ga79lki1s68b3r289b --external --force
 ```
-[Screenshot_13.png]
+![](Screenshot_13.png)
 * После этого выполним проверку работоспособности
 ```
 kubectl get nodes & kubectl get pods --all-namespaces
 ```
-[Screenshot_14.png]
+![](Screenshot_14.png)
 
 ---
 ### Создание тестового приложения
@@ -269,7 +281,9 @@ kubectl get nodes & kubectl get pods --all-namespaces
 
 ## ШАГ 1: Подготовка файлов c простым nginx конфигом и Dockerfile для создания образа приложения.
 ~/test-app/
-[index.html] [nginx.conf] [Dockerfile]
+[index.html](https://github.com/v1us1885/diplom-yc/blob/main/test-app/index.html)   
+[nginx.conf](https://github.com/v1us1885/diplom-yc/blob/main/test-app/nginx.conf)   
+[Dockerfile](https://github.com/v1us1885/diplom-yc/blob/main/test-app/Dockerfile)   
 
 ## ШАГ 2: Создадим отдельный git репозиторий
 * Создадим репозиторий https://github.com/v1us1885/test-app
@@ -289,7 +303,7 @@ git add .
 git commit -m "add test-app"
 git push
 ```
-[Screenshot_12.png]
+![](Screenshot_12.png)
 
 ## ШАГ 3: Создадим образ Docker и загрузим на DockerHub
 * Для начала работ с Docker требуется его установить
@@ -305,26 +319,26 @@ docker --version
 newgrp docker
 exec -l $SHELL
 ```
-[Screenshot_16.png]
+![](Screenshot_16.png)
 
 * Авторизуемся в DockerHub
 ```
 docker login
 ```
-[Screenshot_17.png]
+![](Screenshot_17.png)
 
 * Соберем образ из папки test-app
 ```
 docker build -t v1rus1885/test-app:latest .
 ```
-[Screenshot_15.png]
+![](Screenshot_15.png)
 
 * Загрузим образ
 ```
 docker push v1rus1885/test-app:latest
 ```
-[Screenshot_18.png]
-[Screenshot_19.png]
+![](Screenshot_18.png)
+![](Screenshot_19.png)
 
 ---
 ### Подготовка cистемы мониторинга и деплой приложения
@@ -363,13 +377,13 @@ helm repo add prometheus-community https://prometheus-community.github.io/helm-c
 helm repo update
 helm install monitoring-stack prometheus-community/kube-prometheus-stack --namespace monitoring --create-namespace
 ```
-[Screenshot_20.png]
+![](Screenshot_20.png)
 
 * Проверка развёртывания: Убедимся, что все поды запущены:
 ```
 kubectl get pods -n monitoring
 ```
-[Screenshot_21.png]
+![](Screenshot_21.png)
 
 * Получим доступ в графану, изменим NodePort на LadBalancer для доступа через web
 ```
@@ -377,12 +391,13 @@ kubectl patch svc monitoring-stack-grafana -n monitoring -p '{"spec": {"type": "
 kubectl --namespace monitoring get secrets monitoring-stack-grafana -o jsonpath="{.data.admin-password}" | base64 -d ; echo
 kubectl get svc -n monitoring
 ```
-[Screenshot_22.png]
-[Screenshot_23.png]
+![](Screenshot_22.png)
+![](Screenshot_23.png)
 
 ## ШАГ 2: Deploy нашего приложения
 * подготовим файл deplyment.yaml
-[deplyment.yaml]
+~/test-app/k8s
+[deplyment.yaml](https://github.com/v1us1885/diplom-yc/blob/main/test-app/k8s/deployment.yaml)   
 * выполним наш манифест
 ```
 kubectl apply -f k8s/deployment.yaml
@@ -392,8 +407,8 @@ kubectl apply -f k8s/deployment.yaml
 kubectl get pods
 kubectl get svc test-app-service
 ```
-[Screenshot_24.png]
-[Screenshot_25.png]
+![](Screenshot_24.png)
+![](Screenshot_25.png)
 
 ## ШАГ 3: Создадим отдельный git репозиторий для инфраструктуры
 * Создадим репозиторий https://github.com/v1us1885/infra-diplom
@@ -413,11 +428,11 @@ git add .
 git commit -m "add infra-diplom"
 git push
 ```
-[Screenshot_25.png]
+![](Screenshot_25.png)
 
 ## ШАГ 4: подготовка ci/cd terraform
 * Подготовим файл для terraform apply инфраструктуры при изменении кода
-[apply-mks-terraform]
+[apply-mks-terraform](https://github.com/v1us1885/diplom-yc/blob/main/apply-mks-terraform.yml)   
 
 * т.к. github не работает с секретами в jsonn, переведем ключ sa-key-init.json в base64
 
@@ -436,8 +451,8 @@ git add .
 git commit -m " add terraform-msk "
 git push origin 
 ```
-[Screenshot_27.png]
-[Screenshot_28.png]
+![](Screenshot_27.png)
+![](Screenshot_28.png)
 
 ---
 ### Установка и настройка CI/CD
@@ -463,7 +478,7 @@ git push origin
 ## настроим CI/CD систему с использованием GitHub Actions для автоматической сборки Docker-образа и деплоя в k8s кластер
 
 ## ШАГ 1: Сначала создадим workflow файл test-app/.github/workflows/deploy.yml
-[deploy.yml]
+[deploy.yml](https://github.com/v1us1885/diplom-yc/blob/main/deploy.yml)   
 
 ## ШАГ 2: Создадим отдельный git репозиторий для инфраструктуры
 * Создадим репозиторий https://github.com/v1us1885/infra-diplom
@@ -483,7 +498,7 @@ git add .
 git commit -m "add test-app"
 git push
 ```
-[Screenshot_29.png]
+![](Screenshot_29.png)
 
 ## ШАГ 3: Добавим секреты в github для работы c dockerhub
 DOCKER_HUB_PASSWORD
@@ -497,18 +512,18 @@ git add .
 git commit -m "test deploy, push image"
 git push 
 ```
-[Screenshot_31.png]
+![](Screenshot_31.png)
 
 ## ШАГ 5: Проверим что gри создании тега происходит сборка и отправка с соответствующим label в регистри, а также деплой соответствующего Docker образа в кластер Kubernetes.
 ```
 git tag v1.0.1
 git push origin v1.0.1
 ```
-[Screenshot_32.png]
-[Screenshot_33.png]
-[Screenshot_34.png]
-[Screenshot_35.png]
-[Screenshot_36.png]
+![](Screenshot_32.png)
+![](Screenshot_33.png)
+![](Screenshot_34.png)
+![](Screenshot_35.png)
+![](Screenshot_36.png)
 
 ---
 ## Что необходимо для сдачи задания?
