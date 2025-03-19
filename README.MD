@@ -540,7 +540,7 @@ git push origin v1.0.1
 (https://github.com/v1us1885/infra-diplom)   
 (https://github.com/v1us1885/test-app)   
 (https://hub.docker.com/r/v1rus1885/test-app)   
+(http://51.250.37.150/) - Test-app   
 (http://158.160.157.1/) - Grafana   
 * login: admin   
 * pasw: prom-operator   
-(http://51.250.37.150/) - Test-app   
