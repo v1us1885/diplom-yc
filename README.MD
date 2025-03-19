@@ -537,8 +537,10 @@ git push origin v1.0.1
 7. Все репозитории рекомендуется хранить на одном ресурсе (github, gitlab)
 
 ## Репозитории:
-(https://github.com/v1us1885/infra-diplom)
-(https://github.com/v1us1885/test-app)
-(https://hub.docker.com/r/v1rus1885/test-app)
-(http://158.160.157.1/) - Grafana
-(http://51.250.37.150/) - Test-app
+(https://github.com/v1us1885/infra-diplom)   
+(https://github.com/v1us1885/test-app)   
+(https://hub.docker.com/r/v1rus1885/test-app)   
+(http://158.160.157.1/) - Grafana   
+* login: admin   
+* pasw: prom-operator   
+(http://51.250.37.150/) - Test-app   
