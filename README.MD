@@ -189,7 +189,7 @@ terraform apply
 ## ШАГ 1: Подготовка файлов для разворачивания кластера k8s
 * Подготовим файлы Terraform для разворачивания кластера k8s, воспользуемся сервисом Yandex Managed Service for Kubernetes
 /diplom/terraform-mks
-[k8s-cluster.tf] [mks-node-group.tf] [outputs.tf] [providers.tf] [remote_state.tf] [variables.tf] [terraform.tfvars]
+[k8s-cluster.tf] [mks-node-group.tf] [outputs.tf] [providers.tf] [backend.tf] [remote_state.tf] [variables.tf] [terraform.tfvars]
 
 * remot_state.tf
   - Подключение к удаленному состоянию Terraform, для получения данных id vpc и подсети
@@ -521,3 +521,5 @@ git push origin v1.0.1
 (https://github.com/v1us1885/infra-diplom)
 (https://github.com/v1us1885/test-app)
 (https://hub.docker.com/r/v1rus1885/test-app)
+(http://158.160.157.1/) - Grafana
+(http://51.250.37.150/) - Test-app
